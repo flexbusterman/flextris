@@ -38,6 +38,41 @@ function Piece() {
 		return [canMove, obstacleType]
 	}
 
+	this.canRotate = (rotate) => {
+
+		let rotatedShape
+		let canRotate = true
+		let obstacleType = null
+		let futureRotation
+		// cap number here
+
+		futureRotation = this.rotation + rotate
+
+		if (futureRotation < 0) {
+			futureRotation = this.shape.length-1
+		}
+
+		if (futureRotation > this.shape.length-1) {
+			futureRotation = 0
+		}
+
+		rotatedShape = this.shape[futureRotation]
+
+		for (var i = 0; i < rotatedShape.length; i++) {
+			for (var j = 0; j < rotatedShape[i].length; j++) {
+
+				// rotatedShape Y
+
+				if (rotatedShape[j][i] == 1 && field.columns[this.x+i][this.y+j].obstacle) {
+					canRotate = false
+					obstacleType = field.columns[this.x+i][this.y+j].type
+				}
+			}
+		}
+
+		return [canRotate, obstacleType]
+	}
+
 	this.update = () => {
 		this.counterDown += level + 1
 
@@ -98,16 +133,20 @@ function Piece() {
 	}
 
 	this.rotateLeft = () => {
-		this.rotation--
-		if (this.rotation < 0) {
-			this.rotation = this.shape.length-1
+		if (this.canRotate(-1)[0] == true) {
+			this.rotation--
+			if (this.rotation < 0) {
+				this.rotation = this.shape.length-1
+			}			
 		}
 	}
 
 	this.rotateRight = () => {
-		this.rotation++
-		if (this.rotation > this.shape.length-1) {
-			this.rotation = 0
+		if (this.canRotate(1)[0] == true) {
+			this.rotation++
+			if (this.rotation > this.shape.length-1) {
+				this.rotation = 0
+			}			
 		}
 	}
 
