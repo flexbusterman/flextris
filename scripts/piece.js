@@ -1,3 +1,4 @@
+
 function Piece() {
 	this.x = 0
 	this.y = 0
@@ -9,7 +10,11 @@ function Piece() {
 	this.moveDelayLeft = 0
 	this.moveDelayRight = 0
 
+
 	this.create = (pieceLetter) => {
+		this.canMoveLeft = true
+		this.canMoveRight = true
+		this.canMoveDown = true
 		this.x = fieldWidth / 2
 		this.y = fieldTopMargin - 1
 		this.letter = pieceLetter
@@ -54,9 +59,26 @@ function Piece() {
 			this.counterRight = 0
 		}
 
+
+		// Can move left?
+
+		for (var i = 0; i < this.shape[this.rotation].length; i++) {
+			if (this.shape[this.rotation][i][0] && this.x == fieldLeftMargin) {
+				this.canMoveLeft = false
+			}
+		}
+
+		// console.log(this.canMoveLeft)
+
+
+
+
 	}
 
 	this.move = (x,y) => {
+
+		// check if move is possible
+
 		this.x += x
 		this.y += y
 	}
@@ -80,16 +102,18 @@ function Piece() {
 			for (var j = 0; j < this.shape[this.rotation][0].length; j++) {
 				if (this.shape[this.rotation][i][j] == 1) {
 
+					strokeWeight(0.0001)
 					fill(this.color)
-					stroke(0,0,0,0)
 					rect((this.x+j)*gridSize,(this.y+i)*gridSize,gridSize,gridSize)
+
 				}
 			}
 		}
 	}
 
-	this.collide = () => {
-		field.addPiece(this)
-	}
+	// TODO: Add the collision into this function
+	// this.collide = () => {
+	// 	field.addPiece(this)
+	// }
 
 }

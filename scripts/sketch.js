@@ -28,6 +28,9 @@ let randPiece = () => {
 }
 
 function setup() {
+
+	console.log("Arrow keys moves, 'z' rotates left, 'x' rotates right, 'c' adds piece to board.")
+
 	canvasWidth = (fieldWidth+7)*gridSize*zoom
 	canvasHeight = 25*gridSize*zoom
 	canvas = createCanvas(canvasWidth, canvasHeight)
@@ -46,11 +49,14 @@ function draw() {
 	stroke(0,0,0,0)
 	rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
 
+	field.draw()
+
 	piece.update()
 	piece.draw()
 
 	// collide with bottom
 	if (piece.y > fieldHeight - fieldTopMargin ) {
+		field.addPiece(piece)
 		currentPiece = randPiece()
 		piece.create(currentPiece)
 	}
@@ -65,6 +71,8 @@ function keyTyped() {
 		piece.rotateLeft()
 	} else if (key === 'x') {
 		piece.rotateRight()
+	} else if (key === 'c') {
+		field.addPiece(piece)
 	}
 	return false;
 }
