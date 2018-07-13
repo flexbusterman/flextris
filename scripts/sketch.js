@@ -54,12 +54,6 @@ function draw() {
 	piece.update()
 	piece.draw()
 
-	// collide with bottom
-	if (piece.y > fieldHeight - fieldTopMargin ) {
-		field.addPiece(piece)
-		currentPiece = randPiece()
-		piece.create(currentPiece)
-	}
 }
 
 function windowResized() {
@@ -72,7 +66,7 @@ function keyTyped() {
 	} else if (key === 'x') {
 		piece.rotateRight()
 	} else if (key === 'c') {
-		field.addPiece(piece)
+		console.log(piece.canMove(-1,0))
 	}
 	return false;
 }

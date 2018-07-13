@@ -1,4 +1,3 @@
-
 function Piece() {
 	this.x = 0
 	this.y = 0
@@ -12,15 +11,31 @@ function Piece() {
 
 
 	this.create = (pieceLetter) => {
-		this.canMoveLeft = true
-		this.canMoveRight = true
-		this.canMoveDown = true
 		this.x = fieldWidth / 2
 		this.y = fieldTopMargin - 1
 		this.letter = pieceLetter
 		this.color = colors[pieceLetter]
 		this.shape = shapes[pieceLetter]
 		this.rotation = Math.floor(Math.random() * this.shape.length)
+	}
+
+	this.canMove = (x,y) => {
+		let currentShape = this.shape[this.rotation]
+		let canMove = true
+		let obstacleType = null
+		for (var i = 0; i < currentShape.length; i++) {
+			for (var j = 0; j < currentShape[i].length; j++) {
+
+				// currentShape Y
+
+				if (currentShape[j][i] == 1 && field.columns[this.x+x+i][this.y+y+j].obstacle) {
+					canMove = false
+					obstacleType = field.columns[this.x+x+i][this.y+y+j].type
+				}
+			}
+		}
+
+		return [canMove, obstacleType]
 	}
 
 	this.update = () => {
@@ -31,7 +46,7 @@ function Piece() {
 		if (keyIsDown(DOWN_ARROW)) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
-    			this.counterDown += 33;
+    			this.counterDown += 50;
 			}
   		} else if (keyIsDown(LEFT_ARROW)) {
 			this.moveDelayLeft ++
@@ -47,11 +62,19 @@ function Piece() {
 
   		// time to move!
 		if (this.counterDown >= 100) {
-			this.move(0,1)
+			if (this.canMove(0,1)[0] == true) {
+				this.move(0,1)			
+			} else {
+				this.collide()
+				this.moveDelayDown = 0
+				this.counterDown = 0
+			}
 			this.counterDown = 0
 		}
 		if (this.counterLeft >= 100) {
-			this.move(-1,0)
+			if (this.canMove(-1,0)[0] == true){
+				this.move(-1,0)
+			}
 			this.counterLeft = 0
 		}
 		if (this.counterRight >= 100) {
@@ -59,28 +82,19 @@ function Piece() {
 			this.counterRight = 0
 		}
 
-
-		// Can move left?
-
-		for (var i = 0; i < this.shape[this.rotation].length; i++) {
-			if (this.shape[this.rotation][i][0] && this.x == fieldLeftMargin) {
-				this.canMoveLeft = false
-			}
-		}
-
-		// console.log(this.canMoveLeft)
-
-
-
-
 	}
 
 	this.move = (x,y) => {
+		if (this.canMove(x,y)[0] == true) {
+			this.x += x
+			this.y += y			
+		}
+	}
 
-		// check if move is possible
-
-		this.x += x
-		this.y += y
+	this.collide = () => {
+		field.addPiece(this)
+		currentPiece = randPiece()
+		this.create(currentPiece)
 	}
 
 	this.rotateLeft = () => {
