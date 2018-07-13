@@ -66,7 +66,7 @@ function keyTyped() {
 	} else if (key === 'x') {
 		piece.rotateRight()
 	} else if (key === 'c') {
-		console.log(piece.canMove(-1,0))
+		field.checkLines()
 	}
 	return false;
 }

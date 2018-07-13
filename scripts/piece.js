@@ -127,9 +127,15 @@ function Piece() {
 	}
 
 	this.collide = () => {
+		// update piece and add old to field
 		field.addPiece(this)
 		currentPiece = randPiece()
 		this.create(currentPiece)
+
+		// check for lines and update field
+
+
+
 	}
 
 	this.rotateLeft = () => {
