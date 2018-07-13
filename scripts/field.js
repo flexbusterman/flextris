@@ -17,7 +17,7 @@ function Field(width,height){
 				this.columns[i][j] = {
 					color: [255,0,0,100],
 					obstacle: true,
-					type: "bottom"
+					type: "floor"
 				}							
 			} else if (i == width+1) {
 				this.columns[i][j] = {
