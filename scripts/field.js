@@ -9,19 +9,19 @@ function Field(width,height){
 
 			if (i == 0) {
 				this.columns[i][j] = {
-					color: [255,0,0,100],
+					color: [255,0,0,0],
 					obstacle: true,
 					type: "border"
 				}
 			} else if (j == height+1) {
 				this.columns[i][j] = {
-					color: [255,0,0,100],
+					color: [255,0,0,0],
 					obstacle: true,
 					type: "floor"
 				}							
 			} else if (i == width+1) {
 				this.columns[i][j] = {
-					color: [255,0,0,100],
+					color: [255,0,0,0],
 					obstacle: true,
 					type: "border"
 				}				
