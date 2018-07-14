@@ -55,7 +55,7 @@ function preload() {
 
 function setup() {
 
-	console.log("Arrow keys moves, 'z' rotates left, 'x' rotates right, 'c' adds piece to board.")
+	console.log("Arrow keys moves, 'z' rotates left, 'x' rotates right. When below lvl 10 you can switch lvl by pressing a number on keyboard. Work in progress by Christian Augustin.")
 
 	canvasWidth = (fieldWidth+9)*gridSize*zoom
 	canvasHeight = 25*gridSize*zoom
