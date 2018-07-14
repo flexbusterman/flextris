@@ -14,12 +14,13 @@ let colors = {
 	J: [255,150,0],
 	L: [255,0,255],
 	S: [0,255,0],
-	T: [204,153,0],
+	T: [150],
 	Z: [0,255,255]
 }
 let currentPiece
 let level = 2
 let score = 0
+let testArray = ["a","b","c","d"]
 
 let randPiece = () => {
 	let pieceLetters = ["I","O","J","L","S","T","Z"]
@@ -49,6 +50,7 @@ function draw() {
 	stroke(0,0,0,0)
 	rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
 
+	field.update()
 	field.draw()
 
 	piece.update()

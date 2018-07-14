@@ -9,30 +9,36 @@ function Field(width,height){
 
 			if (i == 0) {
 				this.columns[i][j] = {
-					color: [255,0,0,0],
+					color: [255,0,0,100],
 					obstacle: true,
 					type: "border"
 				}
 			} else if (j == height+1) {
 				this.columns[i][j] = {
-					color: [255,0,0,0],
+					color: [255,0,0,100],
 					obstacle: true,
 					type: "floor"
 				}							
 			} else if (i == width+1) {
 				this.columns[i][j] = {
-					color: [255,0,0,0],
+					color: [255,0,0,100],
 					obstacle: true,
 					type: "border"
 				}				
 			} else {
 				this.columns[i][j] = {
-					color: [0,0,0,0],
+					color: [255,255,0,100],
 					obstacle: false,
 					type: "field"
 				}								
 			}
 		}
+	}
+
+	this.update = () => {
+		if (this.checkLines() != []) {
+			this.removeLines(this.checkLines())
+		} 
 	}
 
 	this.addPiece = (item) => {
@@ -43,7 +49,7 @@ function Field(width,height){
 					this.columns[item.x+i][item.y+j] = {
 						color: item.color,
 						obstacle: true,
-						type: "field"
+						type: "piece"
 					}	
 				}
 			}
@@ -55,42 +61,51 @@ function Field(width,height){
 
 		// move everything down val steps
 		for (var i = 0; i < val; i++) {
-			for (var j = 0; j < fieldWidth; j++) {
+			for (var j = 0; j <= fieldWidth; j++) {
 				this.columns[j].unshift(0)
 			}
 		}
 
 		// fill top with new rows
 
-		for (var i = 0; i < val; i++) {
-			for (var j = 0; j < fieldWidth; j++) {
+		for (var i = 0; i <= fieldWidth+1; i++) {
+			for (var j = 0; j < val; j++) {
+
+
 				if (i == 0) {
 					this.columns[i][j] = {
-						color: [255,0,0,0],
+						color: [255,0,0,100],
 						obstacle: true,
 						type: "border"
 					}
-				} else if (j == fieldHeight+1) {
+				} else if (j == height+1) {
 					this.columns[i][j] = {
-						color: [255,0,0,0],
+						color: [255,0,0,100],
 						obstacle: true,
 						type: "floor"
 					}							
-				} else if (i == fieldWidth+1) {
+				} else if (i == width+1) {
 					this.columns[i][j] = {
-						color: [255,0,0,0],
+						color: [255,0,0,100],
 						obstacle: true,
 						type: "border"
 					}				
 				} else {
 					this.columns[i][j] = {
-						color: [0,0,0,0],
+						color: [255,255,0,100],
 						obstacle: false,
 						type: "field"
 					}								
 				}
+
+
 			}
 		}
+
+
+
+
+
 	}
 
 
@@ -98,12 +113,26 @@ function Field(width,height){
 	this.draw = () => {
 		for (var i = 0; i < this.columns.length; i++) {
 			for (var j = 0; j < this.columns[i].length; j++) {
-				if (this.columns[i][j].obstacle == true){
+				
+				// draw field obstacles
+				if (this.columns[i][j].obstacle == true && this.columns[i][j].type == "piece"){
 
 					strokeWeight(0.0001)
 					fill(this.columns[i][j].color)
 					rect(i*gridSize,j*gridSize,gridSize,gridSize)
 				}
+
+				// // draw non-obstacles for testing
+				// if (this.columns[i][j].obstacle == false){
+
+				// 	strokeWeight(0.0001)
+				// 	fill(this.columns[i][j].color)
+				// 	rect(i*gridSize,j*gridSize,gridSize,gridSize)
+				// }
+
+
+
+
 			}
 		}
 	}
@@ -138,20 +167,24 @@ function Field(width,height){
 
 	this.removeLines = (toRemove) => {
 		let that = this
+		let linesRemoved = 0
 
 		toRemove.forEach(function(index){
-			// console.log("index " + index + that.columns.length)
-			for (var i = 0; i < that.columns.length; i++) {
+			for (var i = 0; i < fieldWidth+1; i++) {
 
 				for (var j = 0; j < that.columns[i].length; j++) {
 
 					if (j == index) {
-						// console.log("boooom" + index)
 						that.columns[i].splice(j,1)
+						// console.log("boooom " + index + " removed " + j)
 					}
 				}
 			}
 			// fieldAfter.splice(index,1)
+			linesRemoved++
+			// console.log("lines removed " + linesRemoved)
+
+			that.addEmptyLinesTop(1)
 		})
 
 		// console.log(fieldAfter)
