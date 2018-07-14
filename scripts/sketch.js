@@ -18,7 +18,7 @@ let colors = {
 	Z: [0,255,255]
 }
 let currentPiece
-let level = 2
+let level = 5
 let score = 0
 let testArray = ["a","b","c","d"]
 let canDownTurbo = true

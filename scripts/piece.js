@@ -80,7 +80,6 @@ function Piece() {
 	this.update = () => {
 		this.counterDown += level + 1
 
-
 		// delay of continuous movement
 		if (keyIsDown(DOWN_ARROW) && canDownTurbo == true) {
 			this.moveDelayDown ++
@@ -106,7 +105,7 @@ function Piece() {
 			} else {
 				this.collide()
 				this.moveDelayDown = 0
-				this.counterDown = 0
+				// this.counterDown = 0
 			}
 			this.counterDown = 0
 		}
