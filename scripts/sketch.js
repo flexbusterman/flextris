@@ -156,8 +156,6 @@ function keyTyped() {
 		piece.rotateLeft()
 	} else if (key === 'x') {
 		piece.rotateRight()
-	} else if (key === 'c') {
-		field.checkLines()
 	} else if (key === "0" && level < 10){
 		level = 0
 	} else if (key === "1" && level < 10){
