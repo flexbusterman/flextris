@@ -8,7 +8,7 @@ let fieldTopMargin = 1
 let fieldLeftMargin = 1
 let fieldWidth = 10 // NES Tetris
 let fieldHeight = 22 // NES Tetris has top 2 hidden
-
+let flashText
 // Tetris & Dr Mario colors
 let colors = {
 	I: [150,100,150],
@@ -33,7 +33,7 @@ let colors = {
 // }
 
 let currentPiece
-let level = 5
+let level = 0
 let testArray = ["a","b","c","d"]
 let canDownTurbo = true
 let nextPiece
@@ -45,9 +45,13 @@ let randPiece = () => {
 }
 let myFont
 
+let state
+let textToShow
+
 function preload() {
 	myFont = loadFont('assets/ponderosa.ttf');
 }
+
 
 function setup() {
 
@@ -61,37 +65,85 @@ function setup() {
 
 	currentPiece = randPiece()
 	field = new Field(fieldWidth,fieldHeight)
+	field.create()
 	nextPiece = new NextPiece()
 	nextPiece.create()
 	piece = new Piece()
 	// piece.create(currentPiece)
 	score = new Score()
+	score.create()
+	flashText = new FlashText()
+	flashText.create("FLEXTRIS", 5.0)
+	state = "game"
+	textToShow = true
 }
 
 function draw() {
+
 	scale(zoom)
 	background(51)
 
-	// draw field
-	fill(22)
-	stroke(0,0,0,0)
-	rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
+	if (state == "game") {
 
-	// draw next piece background
-	fill(22)
-	stroke(0,0,0,0)
-	rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
+		// draw field
+		fill(22)
+		stroke(0,0,0,0)
+		rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
 
-	nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
+		// text to show 
+		if (textToShow == true) {
+			flashText.update()
+			flashText.draw()
+		}
 
-	// score.update()
-	score.draw()
+		// draw next piece background
+		fill(22)
+		stroke(0,0,0,0)
+		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
 
-	// field.update()
-	field.draw()
+		nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
 
-	piece.update()
-	piece.draw()
+		// score.update()
+		score.draw()
+
+		// field.update()
+		field.draw()
+
+		piece.update()
+		piece.draw()
+	}
+
+
+	if (state == "flashLines") {
+		// draw field
+		fill(22)
+		stroke(0,0,0,0)
+		rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
+
+		// text to show 
+		if (textToShow == true) {
+			flashText.draw()
+		}
+
+		// draw next piece background
+		fill(22)
+		stroke(0,0,0,0)
+		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
+
+		nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
+
+		// score.update()
+		score.draw()
+
+		// field.update()
+		field.draw()
+
+		piece.draw()
+
+		field.flashLines.update()
+		field.flashLines.draw()
+
+	}
 
 }
 
@@ -106,7 +158,28 @@ function keyTyped() {
 		piece.rotateRight()
 	} else if (key === 'c') {
 		field.checkLines()
+	} else if (key === "0" && level < 10){
+		level = 0
+	} else if (key === "1" && level < 10){
+		level = 1
+	} else if (key === "2" && level < 10){
+		level = 2
+	} else if (key === "3" && level < 10){
+		level = 3
+	} else if (key === "4" && level < 10){
+		level = 4
+	} else if (key === "5" && level < 10){
+		level = 5
+	} else if (key === "6" && level < 10){
+		level = 6
+	} else if (key === "7" && level < 10){
+		level = 7
+	} else if (key === "8" && level < 10){
+		level = 8
+	} else if (key === "9" && level < 10){
+		level = 9
 	}
+
 	return false;
 }
 

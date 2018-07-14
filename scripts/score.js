@@ -1,14 +1,17 @@
 function Score(){
 	this.highScore = 1000000
-	this.total = 0
-	this.tetrises = 0
-	this.tetrisCombo = 0
-	this.maxTetrisCombo = 0
-	this.lines = 0
-	this.colorShift = [0,0,0,0,0,0]
 
-	this.x = (fieldWidth + fieldLeftMargin + 1) * gridSize
-	this.y = (8 + fieldTopMargin) * gridSize
+	this.create = () => {
+		this.total = 0
+		this.tetrises = 0
+		this.tetrisCombo = 0
+		this.maxTetrisCombo = 0
+		this.lines = 0
+		this.colorShift = [0,0,0,0,0,0]
+
+		this.x = (fieldWidth + fieldLeftMargin + 1) * gridSize
+		this.y = (8 + fieldTopMargin) * gridSize
+	}
 
 	this.update = () => {
 		// time to lvl up?
@@ -21,7 +24,7 @@ function Score(){
 
 	this.draw = () => {
 
-
+		textAlign(LEFT)
 		textFont(myFont,gridSize/1.5)
 		fill(255,255,255)
 				

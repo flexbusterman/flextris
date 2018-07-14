@@ -139,14 +139,24 @@ function Piece() {
 		field.addPiece(this)
 		field.update()
 		// currentPiece = randPiece()
+
+		if(this.y <= 1) {
+			this.death()
+		}
+
 		this.create(currentPiece)
 		nextPiece.create()
 		canDownTurbo = false
+	}
 
-		// check for lines and update field
-
-
-
+	this.death = () => {
+		field.create()
+		nextPiece.create()
+		this.create()
+		score.create()
+		level = 0
+		flashText.create("FLEXTRIS", 5.0)
+		textToShow = true
 	}
 
 	this.rotateLeft = () => {

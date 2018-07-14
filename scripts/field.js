@@ -1,36 +1,44 @@
 function Field(width,height){
-	this.columns = new Array(width + 2)
-	for (var i = 0; i < this.columns.length; i++) {
-		this.columns[i] = new Array(height + 2)
-	}
 
-	for (var i = 0; i < this.columns.length; i++) {
-		for (var j = 0; j < this.columns[0].length; j++){
+	this.flashLines = {}
+	this.flashLines.time = 1000
 
-			if (i == 0) {
-				this.columns[i][j] = {
-					color: [255,0,0,100],
-					obstacle: true,
-					type: "border"
+	this.create = () => {
+
+		this.columns = new Array(width + 2)
+
+		for (var i = 0; i < this.columns.length; i++) {
+			this.columns[i] = new Array(height + 2)
+		}
+
+		for (var i = 0; i < this.columns.length; i++) {
+			for (var j = 0; j < this.columns[0].length; j++){
+
+				if (i == 0) {
+					this.columns[i][j] = {
+						color: [255,0,0,100],
+						obstacle: true,
+						type: "border"
+					}
+				} else if (j == height+1) {
+					this.columns[i][j] = {
+						color: [255,0,0,100],
+						obstacle: true,
+						type: "floor"
+					}							
+				} else if (i == width+1) {
+					this.columns[i][j] = {
+						color: [255,0,0,100],
+						obstacle: true,
+						type: "border"
+					}				
+				} else {
+					this.columns[i][j] = {
+						color: [255,255,0,100],
+						obstacle: false,
+						type: "field"
+					}								
 				}
-			} else if (j == height+1) {
-				this.columns[i][j] = {
-					color: [255,0,0,100],
-					obstacle: true,
-					type: "floor"
-				}							
-			} else if (i == width+1) {
-				this.columns[i][j] = {
-					color: [255,0,0,100],
-					obstacle: true,
-					type: "border"
-				}				
-			} else {
-				this.columns[i][j] = {
-					color: [255,255,0,100],
-					obstacle: false,
-					type: "field"
-				}								
 			}
 		}
 	}
@@ -81,7 +89,11 @@ function Field(width,height){
 
 			score.update()
 
-		} 
+			state = "flashLines"
+			field.flashLines.time = 10
+
+		}
+
 	}
 
 	this.addPiece = (item) => {
@@ -210,7 +222,24 @@ function Field(width,height){
 
 	}
 
+
+	this.flashLines.update = () => {
+		if (this.flashLines.time > 0) {
+			this.flashLines.time--
+		} else {
+			state = "game"
+		}
+	}
+
+	this.flashLines.draw = () => {
+		fill(Math.random()*255,Math.random()*255,Math.random()*255)
+		this.checkLines().forEach(function(element){
+			rect((fieldLeftMargin+1)*gridSize,(fieldTopMargin+element)*gridSize,100,gridSize)
+		})
+	}
+
 	this.removeLines = (toRemove) => {
+
 		let that = this
 		let linesRemoved = 0
 
