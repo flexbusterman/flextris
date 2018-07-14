@@ -36,8 +36,51 @@ function Field(width,height){
 	}
 
 	this.update = () => {
-		if (this.checkLines() != []) {
+
+		// check for lines
+		let fieldLines = this.checkLines().length
+
+		if (fieldLines > 0) {
+
+			// add score and stats
+
+			score.lines += fieldLines
+			let scoreToAdd
+
+			if (fieldLines == 4) {
+				score.tetrises ++
+				score.colorShift[3] = 75
+				score.colorShift[4] = 75
+				score.tetrisCombo++
+				if (score.tetrisCombo>1) {
+					score.colorShift[5] = 75
+				}
+				if (score.tetrisCombo > score.maxTetrisCombo) {
+					score.maxTetrisCombo = score.tetrisCombo
+					score.colorShift[6] = 100
+				}
+				scoreToAdd = fieldLines * 1000 * level * level * score.tetrisCombo
+				score.total += scoreToAdd
+				score.colorShift[1] = 100
+			} else {
+				scoreToAdd = fieldLines * 100 * level * level
+				score.total += scoreToAdd
+				score.colorShift[1] = 30 + (15 * this.checkLines().length)
+				score.colorShift[3] = 30 + (15 * this.checkLines().length)
+				score.tetrisCombo = 0
+			}
+
+			if (score.total > score.highScore) {
+				score.highScore = score.total
+				score.colorShift[0] = score.colorShift[1]
+			}
+
+			// remove lines
+
 			this.removeLines(this.checkLines())
+
+			score.update()
+
 		} 
 	}
 

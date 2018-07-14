@@ -19,32 +19,38 @@ let colors = {
 }
 let currentPiece
 let level = 5
-let score = 0
 let testArray = ["a","b","c","d"]
 let canDownTurbo = true
 let nextPiece
-
+let score
 let randPiece = () => {
 	let pieceLetters = ["I","O","J","L","S","T","Z"]
 	let randPiece = Math.floor(Math.random() * 7)
 	return pieceLetters[randPiece]
+}
+let myFont
+
+function preload() {
+	myFont = loadFont('assets/ponderosa.ttf');
 }
 
 function setup() {
 
 	console.log("Arrow keys moves, 'z' rotates left, 'x' rotates right, 'c' adds piece to board.")
 
-	canvasWidth = (fieldWidth+8)*gridSize*zoom
+	canvasWidth = (fieldWidth+9)*gridSize*zoom
 	canvasHeight = 25*gridSize*zoom
 	canvas = createCanvas(canvasWidth, canvasHeight)
 	canvas.style('display', 'block')
 	select('body').attribute('bgColor', 'black')
+
 	currentPiece = randPiece()
 	field = new Field(fieldWidth,fieldHeight)
 	nextPiece = new NextPiece()
 	nextPiece.create()
 	piece = new Piece()
 	// piece.create(currentPiece)
+	score = new Score()
 }
 
 function draw() {
@@ -63,8 +69,10 @@ function draw() {
 
 	nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
 
+	// score.update()
+	score.draw()
 
-	field.update()
+	// field.update()
 	field.draw()
 
 	piece.update()
@@ -102,9 +110,11 @@ function keyPressed() {
 
 function keyReleased(){
 	if (keyCode === LEFT_ARROW) {
+		canDownTurbo = true
 		piece.moveDelayLeft = 0
 		piece.counterLeft = 0
 	} else if (keyCode === RIGHT_ARROW) {
+		canDownTurbo = true
 		piece.moveDelayRight = 0
 		piece.counterRight = 0
 	} else if (keyCode === DOWN_ARROW) {

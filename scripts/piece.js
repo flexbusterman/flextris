@@ -48,10 +48,11 @@ function Piece() {
 		let canRotate = true
 		let obstacleType = null
 		let futureRotation
-		// cap number here
 
 		futureRotation = this.rotation + rotate
 
+
+		// cap futureRotation
 		if (futureRotation < 0) {
 			futureRotation = this.shape.length-1
 		}
@@ -84,17 +85,18 @@ function Piece() {
 		if (keyIsDown(DOWN_ARROW) && canDownTurbo == true) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
-    			this.counterDown += 50;
+    			this.counterDown += 50
+    			score.total += level + 1 
 			}
   		} else if (keyIsDown(LEFT_ARROW)) {
 			this.moveDelayLeft ++
 			if (this.moveDelayLeft > 10) {
-    			this.counterLeft += 33;
+    			this.counterLeft += 33
 			}
   		} else if (keyIsDown(RIGHT_ARROW)) {
 			this.moveDelayRight ++
 			if (this.moveDelayRight > 10) {
-    			this.counterRight += 33;
+    			this.counterRight += 33
 			}
   		}
 
@@ -132,6 +134,7 @@ function Piece() {
 	this.collide = () => {
 		// update piece and add old to field
 		field.addPiece(this)
+		field.update()
 		// currentPiece = randPiece()
 		this.create(currentPiece)
 		nextPiece.create()
