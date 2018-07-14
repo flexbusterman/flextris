@@ -8,15 +8,30 @@ let fieldTopMargin = 1
 let fieldLeftMargin = 1
 let fieldWidth = 10 // NES Tetris
 let fieldHeight = 22 // NES Tetris has top 2 hidden
+
+// Tetris & Dr Mario colors
 let colors = {
-	I: [255,0,0],
-	O: [0,0,255],
-	J: [255,150,0],
-	L: [255,0,255],
-	S: [0,255,0],
-	T: [150],
-	Z: [0,255,255]
+	I: [150,100,150],
+	O: [200,200,100],
+	J: [100,100,200],
+	L: [100,200,200],
+	S: [100,100,200],
+	T: [200,200,100],
+	Z: [100,200,200]
 }
+
+
+// NES-like colors
+// let colors = {
+// 	I: [255,0,0],
+// 	O: [0,0,255],
+// 	J: [255,150,0],
+// 	L: [255,0,255],
+// 	S: [0,255,0],
+// 	T: [150],
+// 	Z: [0,255,255]
+// }
+
 let currentPiece
 let level = 5
 let testArray = ["a","b","c","d"]
