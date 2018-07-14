@@ -22,6 +22,7 @@ let level = 2
 let score = 0
 let testArray = ["a","b","c","d"]
 let canDownTurbo = true
+let nextPiece
 
 let randPiece = () => {
 	let pieceLetters = ["I","O","J","L","S","T","Z"]
@@ -33,23 +34,35 @@ function setup() {
 
 	console.log("Arrow keys moves, 'z' rotates left, 'x' rotates right, 'c' adds piece to board.")
 
-	canvasWidth = (fieldWidth+7)*gridSize*zoom
+	canvasWidth = (fieldWidth+8)*gridSize*zoom
 	canvasHeight = 25*gridSize*zoom
 	canvas = createCanvas(canvasWidth, canvasHeight)
 	canvas.style('display', 'block')
 	select('body').attribute('bgColor', 'black')
 	currentPiece = randPiece()
 	field = new Field(fieldWidth,fieldHeight)
+	nextPiece = new NextPiece()
+	nextPiece.create()
 	piece = new Piece()
-	piece.create(currentPiece)
+	// piece.create(currentPiece)
 }
 
 function draw() {
 	scale(zoom)
 	background(51)
+
+	// draw field
 	fill(22)
 	stroke(0,0,0,0)
 	rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
+
+	// draw next piece background
+	fill(22)
+	stroke(0,0,0,0)
+	rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
+
+	nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
+
 
 	field.update()
 	field.draw()

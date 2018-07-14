@@ -1,7 +1,4 @@
 function Piece() {
-	this.x = 0
-	this.y = 0
-	this.rotation = 0
 	this.counterDown = 0
 	this.counterLeft = 0
 	this.counterRight = 0
@@ -9,14 +6,21 @@ function Piece() {
 	this.moveDelayLeft = 0
 	this.moveDelayRight = 0
 
+	this.x = fieldWidth / 2
+	this.y = fieldTopMargin - 1
+	this.letter = currentPiece
+	this.color = colors[currentPiece]
+	this.shape = shapes[currentPiece]
+
+	this.rotation = Math.floor(Math.random() * this.shape.length)
 
 	this.create = (pieceLetter) => {
 		this.x = fieldWidth / 2
 		this.y = fieldTopMargin - 1
-		this.letter = pieceLetter
-		this.color = colors[pieceLetter]
-		this.shape = shapes[pieceLetter]
-		this.rotation = Math.floor(Math.random() * this.shape.length)
+		this.letter = nextPiece.letter
+		this.color = colors[nextPiece.letter]
+		this.shape = shapes[nextPiece.letter]
+		this.rotation = nextPiece.rotation
 	}
 
 	this.canMove = (x,y) => {
@@ -129,8 +133,9 @@ function Piece() {
 	this.collide = () => {
 		// update piece and add old to field
 		field.addPiece(this)
-		currentPiece = randPiece()
+		// currentPiece = randPiece()
 		this.create(currentPiece)
+		nextPiece.create()
 		canDownTurbo = false
 
 		// check for lines and update field
