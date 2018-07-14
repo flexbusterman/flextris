@@ -54,6 +54,8 @@ function Field(width,height){
 				}
 			}
 		}
+
+		this.draw()
 	}
 
 

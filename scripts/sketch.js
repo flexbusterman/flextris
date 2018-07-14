@@ -21,6 +21,7 @@ let currentPiece
 let level = 2
 let score = 0
 let testArray = ["a","b","c","d"]
+let canDownTurbo = true
 
 let randPiece = () => {
 	let pieceLetters = ["I","O","J","L","S","T","Z"]
@@ -94,6 +95,7 @@ function keyReleased(){
 		piece.moveDelayRight = 0
 		piece.counterRight = 0
 	} else if (keyCode === DOWN_ARROW) {
+		canDownTurbo = true
 		piece.moveDelayDown = 0
 		piece.counterDown = 0
 	}

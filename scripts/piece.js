@@ -78,7 +78,7 @@ function Piece() {
 
 
 		// delay of continuous movement
-		if (keyIsDown(DOWN_ARROW)) {
+		if (keyIsDown(DOWN_ARROW) && canDownTurbo == true) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
     			this.counterDown += 50;
@@ -131,6 +131,7 @@ function Piece() {
 		field.addPiece(this)
 		currentPiece = randPiece()
 		this.create(currentPiece)
+		canDownTurbo = false
 
 		// check for lines and update field
 
