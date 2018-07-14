@@ -79,14 +79,17 @@ function Piece() {
 	}
 
 	this.update = () => {
-		this.counterDown += level + 1
+		this.counterDown += level * 1.5 + 1
 
 		// delay of continuous movement
 		if (keyIsDown(DOWN_ARROW) && canDownTurbo == true) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
     			this.counterDown += 50
-    			score.total += level + 1 
+    			score.total += level + 1
+    			if (score.total > score.highScore) {
+    				score.highScore = score.total
+    			} 
 			}
   		} else if (keyIsDown(LEFT_ARROW)) {
 			this.moveDelayLeft ++
