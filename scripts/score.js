@@ -1,5 +1,6 @@
 function Score(){
 	this.highScore = 1000000
+	this.fontSize = gridSize / 1.7
 
 	this.create = () => {
 		this.total = 0
@@ -7,7 +8,9 @@ function Score(){
 		this.tetrisCombo = 0
 		this.maxTetrisCombo = 0
 		this.lines = 0
-		this.colorShift = [0,0,0,0,0,0]
+		this.colorShift = [0,0,0,0,0,0,0]
+		this.maxDrought = 0
+		this.drought = 0
 
 		this.x = (fieldWidth + fieldLeftMargin + 1) * gridSize
 		this.y = (8 + fieldTopMargin) * gridSize
@@ -15,17 +18,20 @@ function Score(){
 
 	this.update = () => {
 		// time to lvl up?
-		
 		if (this.lines >= (level+1) * 10) {
 			level ++
 			this.colorShift[2] = 100
+		}
+
+		if (this.drought >= this.maxDrought) {
+			this.maxDrought++
 		}
 	}
 
 	this.draw = () => {
 
 		textAlign(LEFT)
-		textFont(myFont,gridSize/1.5)
+		textFont(myFont,this.fontSize)
 		fill(255,255,255)
 				
 		// TODO: this is bad programming
@@ -50,7 +56,7 @@ function Score(){
 			fill(255,255,255)
 		}
 
-		text("SCORE\n"+this.total,this.x,this.y+3*gridSize/1.5)
+		text("SCORE\n"+this.total,this.x,this.y+3*this.fontSize)
 
 		if (this.colorShift[2] > 0) {
 			this.colorShift[2]--
@@ -60,7 +66,7 @@ function Score(){
 			fill(255,255,255)
 		}
 
-		text("LEVEL\n"+level,this.x,this.y+6*gridSize/1.5)
+		text("LEVEL\n"+level,this.x,this.y+6*this.fontSize)
 
 		if (this.colorShift[3] > 0) {
 			this.colorShift[3]--
@@ -70,7 +76,7 @@ function Score(){
 			fill(255,255,255)
 		}
 
-		text("LINES\n"+this.lines,this.x,this.y+9*gridSize/1.5)
+		text("LINES\n"+this.lines,this.x,this.y+9*this.fontSize)
 
 		if (this.colorShift[4] > 0) {
 			this.colorShift[4]--
@@ -80,7 +86,7 @@ function Score(){
 			fill(255,255,255)
 		}
 
-		text("TETRISES\n"+this.tetrises,this.x,this.y+12*gridSize/1.5)
+		text("TETRISES\n"+this.tetrises,this.x,this.y+12*this.fontSize)
 
 		if (this.colorShift[5] > 0) {
 			this.colorShift[5]--
@@ -90,7 +96,7 @@ function Score(){
 			fill(255,255,255)
 		}
 
-		text("TETRIS COMBO\n"+this.tetrisCombo,this.x,this.y+15*gridSize/1.5)
+		text("TETRIS COMBO\n"+this.tetrisCombo,this.x,this.y+15*this.fontSize)
 
 		if (this.colorShift[6] > 0) {
 			this.colorShift[6]--
@@ -100,7 +106,17 @@ function Score(){
 			fill(255,255,255)
 		}
 
-		text("MAX TETRIS \nCOMBO\n"+this.maxTetrisCombo,this.x,this.y+18*gridSize/1.5)
+		text("MAX TETRIS \nCOMBO\n"+this.maxTetrisCombo,this.x,this.y+18*this.fontSize)
+
+		if (this.colorShift[7] > 0) {
+			this.colorShift[7]--
+
+			fill(255-Math.random()*(2.5 * this.colorShift[7]),255-Math.random()*(2.5 * this.colorShift[7]),255-Math.random()*(2.5 * this.colorShift[7]))
+		} else {
+			fill(255,255,255)
+		}
+
+		text("MAX DROUGHT\n"+this.maxDrought,this.x,this.y+22*this.fontSize)
 	}
 
 }

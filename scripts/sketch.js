@@ -35,15 +35,16 @@ let colors = {
 
 let currentPiece
 let level = 0
-let testArray = ["a","b","c","d"]
 let canDownTurbo = true
 let nextPiece
-let score
+let score = new Score()
+
 let randPiece = () => {
 	let pieceLetters = ["I","O","J","L","S","T","Z"]
 	let randPiece = Math.floor(Math.random() * 7)
 	return pieceLetters[randPiece]
 }
+
 let myFont
 
 let state
@@ -52,7 +53,6 @@ let textToShow
 function preload() {
 	myFont = loadFont('assets/ponderosa.ttf');
 }
-
 
 function setup() {
 
@@ -64,6 +64,7 @@ function setup() {
 	canvas.style('display', 'block')
 	select('body').attribute('bgColor', 'black')
 
+	score.create()
 	currentPiece = randPiece()
 	field = new Field(fieldWidth,fieldHeight)
 	field.create()
@@ -71,8 +72,6 @@ function setup() {
 	nextPiece.create()
 	piece = new Piece()
 	// piece.create(currentPiece)
-	score = new Score()
-	score.create()
 	flashText = new FlashText()
 	flashText.create("FLEXTRIS", 5.0)
 	state = "game"
@@ -104,7 +103,7 @@ function draw() {
 
 		nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
 
-		// score.update()
+		score.update()
 		score.draw()
 
 		// field.update()

@@ -21,6 +21,7 @@ function Piece() {
 		this.color = colors[nextPiece.letter]
 		this.shape = shapes[nextPiece.letter]
 		this.rotation = nextPiece.rotation
+
 	}
 
 	this.canMove = (x,y) => {

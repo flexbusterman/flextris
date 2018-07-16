@@ -1,12 +1,18 @@
 function NextPiece() {
 
-	this.create = (pieceLetter) => {
+	this.create = () => {
 		let pieceLetters = ["I","O","J","L","S","T","Z"]
 		let randPiece = pieceLetters[Math.floor(Math.random() * 7)]
 		this.letter = randPiece
 		this.color = colors[randPiece]
 		this.shape = shapes[randPiece]
 		this.rotation = Math.floor(Math.random() * this.shape.length)
+
+		if (this.letter != "I") {
+			score.drought++
+		} else {
+			score.drought = 0
+		}
 	}
 
 	this.draw = (x,y) => {
