@@ -44,8 +44,8 @@ let randPiece = () => {
 	let randPiece = Math.floor(Math.random() * 7)
 	return pieceLetters[randPiece]
 }
-
-
+let intro = new Intro()
+let gameOver = new GameOver()
 let myFont
 
 let state
@@ -82,7 +82,7 @@ function setup() {
 	// piece.create(currentPiece)
 	flashText = new FlashText()
 	flashText.create("FLEXTRIS", 5.0)
-	state = "game"
+	state = "intro"
 	textToShow = true
 }
 
@@ -90,6 +90,70 @@ function draw() {
 
 	scale(zoom)
 	background(51)
+
+	if (state == "intro") {
+
+		// draw field
+		fill(22)
+		stroke(0,0,0,0)
+		rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
+
+		// // text to show 
+		// if (textToShow == true) {
+		// 	flashText.update()
+		// 	flashText.draw()
+		// }
+
+		// draw next piece background
+		fill(22)
+		stroke(0,0,0,0)
+		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
+
+		// nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
+
+		score.update()
+		score.draw()
+
+		// field.update()
+		field.draw()
+
+		intro.update()
+		intro.draw()
+
+		// piece.update()
+		// piece.draw()
+	}
+
+	if (state == "game over") {
+
+		// draw field
+		fill(22)
+		stroke(0,0,0,0)
+		rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
+
+		// draw next piece background
+		fill(22)
+		stroke(0,0,0,0)
+		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
+
+		score.update()
+		score.draw()
+
+		// field.update()
+		field.draw()
+
+		// draw overlay
+		fill(22,22,22,220)
+		stroke(0,0,0,0)
+		rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
+
+
+		gameOver.update()
+		gameOver.draw()
+
+		// piece.update()
+		// piece.draw()
+	}
 
 	if (state == "game") {
 
@@ -191,6 +255,15 @@ function keyTyped() {
 }
 
 function keyPressed() {
+	if (state == "intro") {
+		state = "game"
+	}
+
+	if (state == "game over") {
+		newGame()
+	}
+
+
 	if (keyCode === LEFT_ARROW) {
 		piece.counterLeft = 0
 		piece.move(-1,0);
@@ -219,4 +292,15 @@ function keyReleased(){
 		piece.moveDelayDown = 0
 		piece.counterDown = 0
 	}
+}
+
+function newGame(){
+	state = "game"
+	field.create()
+	nextPiece.create()
+	piece.create()
+	score.create()
+	level = 0
+	flashText.create("FLEXTRIS", 5.0)
+	textToShow = true
 }

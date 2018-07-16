@@ -174,7 +174,7 @@ function Field(width,height){
 
 	this.draw = () => {
 		for (var i = 0; i < this.columns.length; i++) {
-			for (var j = 0; j < this.columns[i].length; j++) {
+			for (var j = 1; j < this.columns[i].length; j++) {
 				
 				// draw field obstacles
 				if (this.columns[i][j].obstacle == true && this.columns[i][j].type == "piece"){

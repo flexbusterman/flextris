@@ -36,7 +36,7 @@ function Score(){
 				
 		// TODO: this is bad programming
 
-		text("NEXT PIECE", this.x, (fieldTopMargin+1)*gridSize)
+		text("NEXT PIECE", this.x, (fieldTopMargin+1)*gridSize-1.5)
 
 		if (this.colorShift[0] > 0) {
 			this.colorShift[0]--

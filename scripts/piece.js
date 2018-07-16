@@ -21,7 +21,6 @@ function Piece() {
 		this.color = colors[nextPiece.letter]
 		this.shape = shapes[nextPiece.letter]
 		this.rotation = nextPiece.rotation
-
 	}
 
 	this.canMove = (x,y) => {
@@ -151,13 +150,7 @@ function Piece() {
 	}
 
 	this.death = () => {
-		field.create()
-		nextPiece.create()
-		this.create()
-		score.create()
-		level = 0
-		flashText.create("FLEXTRIS", 5.0)
-		textToShow = true
+		state = "game over"
 	}
 
 	this.rotateLeft = () => {
@@ -197,11 +190,14 @@ function Piece() {
 	this.draw = () => {
 		for (var i = 0; i < this.shape[this.rotation][0].length; i++) {
 			for (var j = 0; j < this.shape[this.rotation][0].length; j++) {
-				if (this.shape[this.rotation][i][j] == 1) {
+				if (this.shape[this.rotation][i][j] == 1 ) {
 
 					strokeWeight(0.0001)
 					fill(this.color)
-					rect((this.x+j)*gridSize,(this.y+i)*gridSize,gridSize,gridSize)
+					if ((this.y+i)*gridSize >= gridSize*fieldTopMargin) {
+						rect((this.x+j)*gridSize,(this.y+i)*gridSize,gridSize,gridSize)
+						
+					}
 
 				}
 			}
