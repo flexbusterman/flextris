@@ -225,9 +225,9 @@ function windowResized() {
 }
 
 function keyTyped() {
-	if (key === 'z') {
+	if (key === 'z' || key === 'Z' ) {
 		piece.rotateLeft()
-	} else if (key === 'x') {
+	} else if (key === 'x' || key === 'X') {
 		piece.rotateRight()
 	} else if (key === "0" && level < 10){
 		level = 0
