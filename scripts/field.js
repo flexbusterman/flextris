@@ -1,7 +1,8 @@
 function Field(width,height){
+	this.currentLines = []
 
 	this.flashLines = {}
-	this.flashLines.time = 1000
+	this.flashLines.time = 10
 
 	this.create = () => {
 
@@ -45,17 +46,20 @@ function Field(width,height){
 
 	this.update = () => {
 
-		// check for lines
-		let fieldLines = this.checkLines().length
 
-		if (fieldLines > 0) {
+		let amountLines = this.checkLines().length
+		// check for lines
+		this.fieldLines = this.checkLines()
+
+
+		if (amountLines > 0) {
 
 			// add score and stats
 
-			score.lines += fieldLines
+			score.lines += amountLines
 			let scoreToAdd
 
-			if (fieldLines == 4) {
+			if (amountLines == 4) {
 				score.tetrises ++
 				score.colorShift[3] = 75
 				score.colorShift[4] = 75
@@ -67,14 +71,14 @@ function Field(width,height){
 					score.maxTetrisCombo = score.tetrisCombo
 					score.colorShift[6] = 100
 				}
-				scoreToAdd = fieldLines * 1000 * level * level * score.tetrisCombo
+				scoreToAdd = amountLines * 1000 * level * level * score.tetrisCombo
 				score.total += scoreToAdd
 				score.colorShift[1] = 100
 			} else {
-				scoreToAdd = fieldLines * 100 * level * level
+				scoreToAdd = amountLines * 100 * level * level
 				score.total += scoreToAdd
-				score.colorShift[1] = 30 + (15 * this.checkLines().length)
-				score.colorShift[3] = 30 + (15 * this.checkLines().length)
+				score.colorShift[1] = 30 + (15 * amountLines)
+				score.colorShift[3] = 30 + (15 * amountLines)
 				score.tetrisCombo = 0
 			}
 
@@ -84,13 +88,14 @@ function Field(width,height){
 			}
 
 			// remove lines
-
-			this.removeLines(this.checkLines())
+			if (state == "game") {
+				this.removeLines(this.checkLines())
+			}
 
 			score.update()
 
 			state = "flashLines"
-			field.flashLines.time = 10
+			field.flashLines.time = 1
 
 		}
 
@@ -188,8 +193,6 @@ function Field(width,height){
 				// }
 
 
-
-
 			}
 		}
 	}
@@ -232,9 +235,11 @@ function Field(width,height){
 	}
 
 	this.flashLines.draw = () => {
-		fill(Math.random()*255,Math.random()*255,Math.random()*255)
-		this.checkLines().forEach(function(element){
-			rect((fieldLeftMargin+1)*gridSize,(fieldTopMargin+element)*gridSize,100,gridSize)
+		fill(255,255,255,0.5)
+		
+		this.fieldLines.forEach(function(element){
+			// console.log(element)
+			rect(fieldLeftMargin*gridSize,(fieldTopMargin+element-1)*gridSize,fieldWidth*gridSize,gridSize)
 		})
 	}
 

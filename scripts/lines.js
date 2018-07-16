@@ -1,4 +1,4 @@
-function Field(width,height){
+function Lines(width,height){
 	this.columns = new Array(width + 2)
 	for (var i = 0; i < this.columns.length; i++) {
 		this.columns[i] = new Array(height + 2)

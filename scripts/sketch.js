@@ -9,6 +9,7 @@ let fieldLeftMargin = 1
 let fieldWidth = 10 // NES Tetris
 let fieldHeight = 22 // NES Tetris has top 2 hidden
 let flashText
+
 // Tetris & Dr Mario colors
 let colors = {
 	I: [150,100,150],
@@ -125,14 +126,14 @@ function draw() {
 			flashText.draw()
 		}
 
-		// draw next piece background
+		// // draw next piece background
 		fill(22)
 		stroke(0,0,0,0)
 		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
 
 		nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
 
-		// score.update()
+		score.update()
 		score.draw()
 
 		// field.update()
