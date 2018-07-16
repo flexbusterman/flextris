@@ -192,6 +192,8 @@ function keyPressed() {
 	} else if (keyCode === DOWN_ARROW) {
 		piece.counterDown = 0
 		piece.move(0,1);
+	} else if (keyCode === UP_ARROW) {
+		piece.drop();
 	}
 }
 

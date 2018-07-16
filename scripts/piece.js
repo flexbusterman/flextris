@@ -177,6 +177,22 @@ function Piece() {
 		}
 	}
 
+	this.drop = () => {
+		for (var i = 0; i < fieldHeight; i++) {
+			if (this.canMove(0,1)[0]) {
+				this.move(0,1)
+			} else {
+				score.total += i * (level + 1) * 2
+    			if (score.total > score.highScore) {
+    				score.highScore = score.total
+    			} 
+			}
+			
+		}
+		this.collide()
+		canDownTurbo = true
+	}
+
 	this.draw = () => {
 		for (var i = 0; i < this.shape[this.rotation][0].length; i++) {
 			for (var j = 0; j < this.shape[this.rotation][0].length; j++) {
