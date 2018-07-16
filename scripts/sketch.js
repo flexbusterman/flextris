@@ -45,10 +45,17 @@ let randPiece = () => {
 	return pieceLetters[randPiece]
 }
 
+
 let myFont
 
 let state
 let textToShow
+
+function centerCanvas() {
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  canvas.position(x, y);
+}
 
 function preload() {
 	myFont = loadFont('assets/ponderosa.ttf');
@@ -62,6 +69,7 @@ function setup() {
 	canvasHeight = 25*gridSize*zoom
 	canvas = createCanvas(canvasWidth, canvasHeight)
 	canvas.style('display', 'block')
+	centerCanvas()
 	select('body').attribute('bgColor', 'black')
 
 	score.create()
@@ -149,6 +157,7 @@ function draw() {
 
 function windowResized() {
 	resizeCanvas(canvasWidth, canvasHeight);
+	centerCanvas()
 }
 
 function keyTyped() {
