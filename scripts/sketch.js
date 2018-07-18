@@ -35,7 +35,7 @@ let colors = {
 
 let currentPiece
 let level = 0
-let canDownTurbo = true
+let canTurbo = false
 let nextPiece
 let score = new Score()
 
@@ -254,7 +254,22 @@ function keyTyped() {
 	return false;
 }
 
-function keyPressed() {
+function keyPressed(asdf) {
+	if (state == "game") {
+		if (keyCode === LEFT_ARROW) {
+			piece.counterLeft = 0
+			piece.move(-1,0);
+		} else if (keyCode === RIGHT_ARROW) {
+			piece.counterRight = 0
+			piece.move(1,0);
+		} else if (keyCode === DOWN_ARROW) {
+			piece.counterDown = 0
+			piece.move(0,1);
+		} else if (keyCode === UP_ARROW) {
+			piece.drop();
+		}	
+	}
+
 	if (state == "intro") {
 		state = "game"
 	}
@@ -262,35 +277,23 @@ function keyPressed() {
 	if (state == "game over") {
 		newGame()
 	}
-
-
-	if (keyCode === LEFT_ARROW) {
-		piece.counterLeft = 0
-		piece.move(-1,0);
-	} else if (keyCode === RIGHT_ARROW) {
-		piece.counterRight = 0
-		piece.move(1,0);
-	} else if (keyCode === DOWN_ARROW) {
-		piece.counterDown = 0
-		piece.move(0,1);
-	} else if (keyCode === UP_ARROW) {
-		piece.drop();
-	}
 }
 
 function keyReleased(){
 	if (keyCode === LEFT_ARROW) {
-		canDownTurbo = true
+		canTurbo = true
 		piece.moveDelayLeft = 0
 		piece.counterLeft = 0
 	} else if (keyCode === RIGHT_ARROW) {
-		canDownTurbo = true
+		canTurbo = true
 		piece.moveDelayRight = 0
 		piece.counterRight = 0
 	} else if (keyCode === DOWN_ARROW) {
-		canDownTurbo = true
+		canTurbo = true
 		piece.moveDelayDown = 0
 		piece.counterDown = 0
+	} else if (keyCode === UP_ARROW) {
+		canTurbo = true
 	}
 }
 
@@ -303,4 +306,5 @@ function newGame(){
 	level = 0
 	flashText.create("FLEXTRIS", 5.0)
 	textToShow = true
+	canTurbo = false
 }
