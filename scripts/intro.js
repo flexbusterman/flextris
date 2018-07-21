@@ -3,7 +3,7 @@ function Intro(){
 	this.logo = {}
 	this.logo.fontSize = 1.3 * gridSize
 	this.logo.x = (fieldLeftMargin*1.2 + fieldWidth/2) * gridSize
-	this.logo.y = (fieldTopMargin + 3.5) * gridSize
+	this.logo.y = (fieldTopMargin + 3.2) * gridSize
 
 	this.beta = {}
 	this.beta.fontSize = 0.6 * gridSize
@@ -13,7 +13,7 @@ function Intro(){
 	this.instructions = {}
 	this.instructions.fontSize = 0.4 * gridSize
 	this.instructions.x = (fieldLeftMargin+1) * gridSize
-	this.instructions.y = (fieldTopMargin + 6) * gridSize
+	this.instructions.y = (fieldTopMargin + 5.5) * gridSize
 	this.instructions.string =
 `INSTRUCTIONS:
 
@@ -38,6 +38,9 @@ Press any key to begin.
 
 --------------------------
 
+Original concept by
+Alexey Pajitnov.
+
 This is a work in progress
 and more features will be
 added in the future.
@@ -45,8 +48,6 @@ added in the future.
 Remember that the FLEXTRIS
 master remains calm, even
 in the face of death.
-
-Enjoy!
 
 / Christian Augustin 2018
 
@@ -73,7 +74,7 @@ Enjoy!
 
 		fill(100)
 		textFont(myFont,this.instructions.fontSize)
-		text(this.instructions.string2, this.instructions.x,this.instructions.y*2+5)
+		text(this.instructions.string2, this.instructions.x,this.instructions.y*2+8)
 
 	}
 }
