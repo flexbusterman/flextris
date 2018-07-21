@@ -82,7 +82,7 @@ function Piece() {
 		this.counterDown += level * 1.5 + 1
 
 		// delay of continuous movement
-		if (keyIsDown(DOWN_ARROW) && canDownTurbo == true) {
+		if (keyIsDown(DOWN_ARROW) && canTurbo) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
     			this.counterDown += 50
@@ -91,12 +91,12 @@ function Piece() {
     				score.highScore = score.total
     			} 
 			}
-  		} else if (keyIsDown(LEFT_ARROW)) {
+  		} else if (keyIsDown(LEFT_ARROW) && canTurbo) {
 			this.moveDelayLeft ++
 			if (this.moveDelayLeft > 10) {
     			this.counterLeft += 33
 			}
-  		} else if (keyIsDown(RIGHT_ARROW)) {
+  		} else if (keyIsDown(RIGHT_ARROW) && canTurbo) {
 			this.moveDelayRight ++
 			if (this.moveDelayRight > 10) {
     			this.counterRight += 33
@@ -146,7 +146,7 @@ function Piece() {
 
 		this.create(currentPiece)
 		nextPiece.create()
-		canDownTurbo = false
+		canTurbo = false
 	}
 
 	this.death = () => {
@@ -184,7 +184,7 @@ function Piece() {
 			
 		}
 		this.collide()
-		canDownTurbo = true
+		canTurbo = true
 	}
 
 	this.draw = () => {
