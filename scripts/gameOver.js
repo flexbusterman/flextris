@@ -6,21 +6,15 @@ function GameOver(){
 	this.logo.y = (fieldTopMargin + 3.5) * gridSize
 
 	this.text = {}
-	this.text.fontSize = 0.4 * gridSize
+	this.text.fontSize = 0.5 * gridSize
 	this.text.x = this.logo.x
 	this.text.y = (fieldTopMargin + 5) * gridSize
-	this.text.string =
-`YOU ARE A FLEXTRIS MASTER!
+	this.text.master =`YOU ARE A
+FLEXTRIS MASTER!`
+	this.text.score =`SCORE `
+	this.text.space =`PRESS SPACE`
 
-
-
-
-
-Final Score
-
-`
-
-	this.text.string2 = `
+	this.text.plug = `
 Submit your score on
 social media by taking
 a picture of the screen
@@ -37,13 +31,16 @@ and post using the
 		fill(Math.random()*255,Math.random()*255,Math.random()*255)
 		text("CONGRATULATIONS", this.logo.x,this.logo.y)
 
-		textAlign(CENTER)
 		fill(255)
 		textFont(myFont,this.text.fontSize)
-		text(this.text.string + score.total, this.text.x,this.text.y)
+		text(this.text.master, this.text.x,this.text.y)
+
+		text(this.text.score + score.total, this.text.x,this.text.y+5*gridSize)
+
+		text(this.text.space, this.text.x,this.text.y+9*gridSize)
 
 		fill(100)
 		textFont(myFont,this.text.fontSize)
-		text(this.text.string2, this.text.x,this.text.y*2+5)
+		text(this.text.plug, this.text.x,this.text.y+13*gridSize)
 	}
 }

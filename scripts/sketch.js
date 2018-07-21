@@ -249,12 +249,14 @@ function keyTyped() {
 		level = 8
 	} else if (key === "9" && level < 10){
 		level = 9
+	} else if (key === " " && state == "game over"){
+		newGame()
 	}
 
 	return false;
 }
 
-function keyPressed(asdf) {
+function keyPressed() {
 	if (state == "game") {
 		if (keyCode === LEFT_ARROW) {
 			piece.counterLeft = 0
@@ -274,9 +276,6 @@ function keyPressed(asdf) {
 		state = "game"
 	}
 
-	if (state == "game over") {
-		newGame()
-	}
 }
 
 function keyReleased(){

@@ -91,12 +91,12 @@ function Piece() {
     				score.highScore = score.total
     			} 
 			}
-  		} else if (keyIsDown(LEFT_ARROW) && canTurbo) {
+  		} else if (keyIsDown(LEFT_ARROW)) {
 			this.moveDelayLeft ++
 			if (this.moveDelayLeft > 10) {
     			this.counterLeft += 33
 			}
-  		} else if (keyIsDown(RIGHT_ARROW) && canTurbo) {
+  		} else if (keyIsDown(RIGHT_ARROW)) {
 			this.moveDelayRight ++
 			if (this.moveDelayRight > 10) {
     			this.counterRight += 33
