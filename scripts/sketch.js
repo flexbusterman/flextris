@@ -84,6 +84,8 @@ function setup() {
 	flashText.create("FLEXTRIS", 5.0)
 	state = "intro"
 	textToShow = true
+	sounds = new Sounds()
+	sounds.create()
 }
 
 function draw() {
