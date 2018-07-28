@@ -127,7 +127,6 @@ function Piece() {
 	}
 
 	this.move = (x,y) => {
-		console.log('x', x, 'y', y);
 		if (this.canMove(x,y)[0] == true) {
 			this.x += x
 			this.y += y			
