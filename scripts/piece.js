@@ -80,8 +80,8 @@ function Piece() {
 
 	this.update = () => {
 		this.counterDown += level * 1.5 + 1
-
 		// delay of continuous movement
+;
 		if (keyIsDown(DOWN_ARROW) && canTurbo) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
@@ -101,12 +101,11 @@ function Piece() {
 			if (this.moveDelayRight > 10) {
     			this.counterRight += 33
 			}
-  		}
+		  }
 
-  		// time to move!
 		if (this.counterDown >= 100) {
 			if (this.canMove(0,1)[0] == true) {
-				this.move(0,1)			
+				this.move(0,1)
 			} else {
 				this.collide()
 				this.moveDelayDown = 0
@@ -128,9 +127,14 @@ function Piece() {
 	}
 
 	this.move = (x,y) => {
+		console.log('x', x, 'y', y);
 		if (this.canMove(x,y)[0] == true) {
 			this.x += x
 			this.y += y			
+		} else {
+			if (x === 0 && y === 1) {
+				this.collide()
+			}
 		}
 	}
 
