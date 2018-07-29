@@ -28,7 +28,7 @@ X rotates piece right.
 
 While below level 10 you
 can choose level at any
-time by typing 1-9 on
+time by typing 0-9 on
 the keyboard.
 
 Press SPACE to begin.
