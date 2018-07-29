@@ -31,7 +31,7 @@ can choose level at any
 time by typing 1-9 on
 the keyboard.
 
-Press any key to begin.
+Press SPACE to begin.
 `
 
 	this.instructions.string2 = `

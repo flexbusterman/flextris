@@ -10,7 +10,6 @@ let fieldWidth = 10 // NES Tetris
 let fieldHeight = 22 // NES Tetris has top 2 hidden
 let flashText
 
-// Tetris & Dr Mario colors
 let colors = {
 	I: [150,100,150],
 	O: [200,200,100],
@@ -20,18 +19,6 @@ let colors = {
 	T: [200,200,100],
 	Z: [100,200,200]
 }
-
-
-// NES-like colors
-// let colors = {
-// 	I: [255,0,0],
-// 	O: [0,0,255],
-// 	J: [255,150,0],
-// 	L: [255,0,255],
-// 	S: [0,255,0],
-// 	T: [150],
-// 	Z: [0,255,255]
-// }
 
 let currentPiece
 let level = 0
@@ -44,6 +31,7 @@ let randPiece = () => {
 	let randPiece = Math.floor(Math.random() * 7)
 	return pieceLetters[randPiece]
 }
+
 let intro = new Intro()
 let gameOver = new GameOver()
 let myFont
@@ -62,16 +50,12 @@ function preload() {
 }
 
 function setup() {
-
-	console.log("Arrow keys moves, 'z' rotates left, 'x' rotates right. When below lvl 10 you can switch lvl by pressing a number on keyboard. Work in progress by Christian Augustin.")
-
 	canvasWidth = (fieldWidth+9)*gridSize*zoom
 	canvasHeight = 25*gridSize*zoom
 	canvas = createCanvas(canvasWidth, canvasHeight)
 	canvas.style('display', 'block')
 	centerCanvas()
 	select('body').attribute('bgColor', 'black')
-
 	score.create()
 	currentPiece = randPiece()
 	field = new Field(fieldWidth,fieldHeight)
@@ -79,7 +63,6 @@ function setup() {
 	nextPiece = new NextPiece()
 	nextPiece.create()
 	piece = new Piece()
-	// piece.create(currentPiece)
 	flashText = new FlashText()
 	flashText.create("FLEXTRIS", 5.0)
 	state = "intro"
@@ -98,30 +81,19 @@ function draw() {
 		stroke(0,0,0,0)
 		rect(fieldLeftMargin*gridSize,fieldTopMargin*gridSize,fieldWidth*gridSize,fieldHeight*gridSize)
 
-		// // text to show 
-		// if (textToShow == true) {
-		// 	flashText.update()
-		// 	flashText.draw()
-		// }
-
 		// draw next piece background
 		fill(22)
 		stroke(0,0,0,0)
 		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
 
-		// nextPiece.draw(fieldWidth+fieldLeftMargin+2,fieldTopMargin+2)
-
 		score.update()
 		score.draw()
 
-		// field.update()
 		field.draw()
 
 		intro.update()
 		intro.draw()
 
-		// piece.update()
-		// piece.draw()
 	}
 
 	if (state == "game over") {
@@ -139,7 +111,6 @@ function draw() {
 		score.update()
 		score.draw()
 
-		// field.update()
 		field.draw()
 
 		// draw overlay
@@ -151,8 +122,6 @@ function draw() {
 		gameOver.update()
 		gameOver.draw()
 
-		// piece.update()
-		// piece.draw()
 	}
 
 	if (state == "game") {
@@ -178,7 +147,6 @@ function draw() {
 		score.update()
 		score.draw()
 
-		// field.update()
 		field.draw()
 
 		piece.update()
@@ -197,7 +165,7 @@ function draw() {
 			flashText.draw()
 		}
 
-		// // draw next piece background
+		// draw next piece background
 		fill(22)
 		stroke(0,0,0,0)
 		rect((fieldWidth+fieldLeftMargin + 1)*gridSize,(fieldTopMargin+1)*gridSize,5*gridSize,5*gridSize)
@@ -207,7 +175,6 @@ function draw() {
 		score.update()
 		score.draw()
 
-		// field.update()
 		field.draw()
 
 		piece.draw()
@@ -251,6 +218,8 @@ function keyTyped() {
 		level = 9
 	} else if (key === " " && state == "game over"){
 		newGame()
+	} else if (key === " " && state == "intro"){
+		newGame()
 	}
 
 	return false;
@@ -271,11 +240,6 @@ function keyPressed() {
 			piece.drop();
 		}	
 	}
-
-	if (state == "intro") {
-		state = "game"
-	}
-
 }
 
 function keyReleased(){
