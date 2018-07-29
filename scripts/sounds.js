@@ -55,7 +55,6 @@ function Sounds(){
 			stop() : This method stops the sequencer that is built into the oscillator if it has been started.
 			kill() : Disconnect the oscillator from whatever bus it is connected to.
 			*/
-
         }
     )
     .chord.seq( Rndi(0,1,2), 2 )
