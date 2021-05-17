@@ -221,7 +221,6 @@ function keyTyped() {
 	} else if (key === " " && state == "intro"){
 		newGame()
 	}
-
 	return false;
 }
 
