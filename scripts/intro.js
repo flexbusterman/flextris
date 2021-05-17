@@ -5,10 +5,10 @@ function Intro(){
 	this.logo.x = (fieldLeftMargin*1.2 + fieldWidth/2) * gridSize
 	this.logo.y = (fieldTopMargin + 3.2) * gridSize
 
-	this.beta = {}
-	this.beta.fontSize = 0.6 * gridSize
-	this.beta.x = (fieldLeftMargin*5.3 + fieldWidth/2) * gridSize
-	this.beta.y = (fieldTopMargin + 4.2) * gridSize
+	// this.beta = {}
+	// this.beta.fontSize = 0.6 * gridSize
+	// this.beta.x = (fieldLeftMargin*5.3 + fieldWidth/2) * gridSize
+	// this.beta.y = (fieldTopMargin + 4.2) * gridSize
 
 	this.instructions = {}
 	this.instructions.fontSize = 0.4 * gridSize
@@ -23,12 +23,12 @@ up arrow that transports
 piece to the future where
 it has already landed.
 
-Z rotates piece left.
-X rotates piece right.
+Z/D rotates piece left.
+X/F rotates piece right.
 
 While below level 10 you
 can choose level at any
-time by typing 0-9 on
+time by pressing 0-9 on
 the keyboard.
 
 Press SPACE to begin.

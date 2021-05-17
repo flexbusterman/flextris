@@ -192,9 +192,9 @@ function windowResized() {
 }
 
 function keyTyped() {
-	if (key === 'z' || key === 'Z' ) {
+	if (key === 'z' || key === 'Z' || key === 'd') {
 		piece.rotateLeft()
-	} else if (key === 'x' || key === 'X') {
+	} else if (key === 'x' || key === 'X' || key === 'f') {
 		piece.rotateRight()
 	} else if (key === "0" && level < 10){
 		level = 0
@@ -226,35 +226,35 @@ function keyTyped() {
 
 function keyPressed() {
 	if (state == "game") {
-		if (keyCode === LEFT_ARROW) {
+		if (keyCode === LEFT_ARROW || keyCode == 72) {
 			piece.counterLeft = 0
 			piece.move(-1,0);
-		} else if (keyCode === RIGHT_ARROW) {
+		} else if (keyCode === RIGHT_ARROW || keyCode == 76) {
 			piece.counterRight = 0
 			piece.move(1,0);
-		} else if (keyCode === DOWN_ARROW) {
+		} else if (keyCode === DOWN_ARROW || keyCode == 74) {
 			piece.counterDown = 0
 			piece.move(0,1);
-		} else if (keyCode === UP_ARROW) {
+		} else if (keyCode === UP_ARROW || keyCode == 75) {
 			piece.drop();
 		}	
 	}
 }
 
 function keyReleased(){
-	if (keyCode === LEFT_ARROW) {
+	if (keyCode === LEFT_ARROW || keyCode == 72) {
 		canTurbo = true
 		piece.moveDelayLeft = 0
 		piece.counterLeft = 0
-	} else if (keyCode === RIGHT_ARROW) {
+	} else if (keyCode === RIGHT_ARROW || keyCode == 76) {
 		canTurbo = true
 		piece.moveDelayRight = 0
 		piece.counterRight = 0
-	} else if (keyCode === DOWN_ARROW) {
+	} else if (keyCode === DOWN_ARROW || keyCode == 74) {
 		canTurbo = true
 		piece.moveDelayDown = 0
 		piece.counterDown = 0
-	} else if (keyCode === UP_ARROW) {
+	} else if (keyCode === UP_ARROW || keyCode == 75) {
 		canTurbo = true
 	}
 }

@@ -82,7 +82,7 @@ function Piece() {
 		this.counterDown += level * 1.5 + 1
 		// delay of continuous movement
 ;
-		if (keyIsDown(DOWN_ARROW) && canTurbo) {
+		if ((keyIsDown(DOWN_ARROW) || keyIsDown(74)) && canTurbo) {
 			this.moveDelayDown ++
 			if (this.moveDelayDown > 10) {
     			this.counterDown += 50
@@ -91,12 +91,12 @@ function Piece() {
     				score.highScore = score.total
     			} 
 			}
-  		} else if (keyIsDown(LEFT_ARROW)) {
+  		} else if (keyIsDown(LEFT_ARROW) || keyIsDown(72)) {
 			this.moveDelayLeft ++
 			if (this.moveDelayLeft > 10) {
     			this.counterLeft += 33
 			}
-  		} else if (keyIsDown(RIGHT_ARROW)) {
+  		} else if (keyIsDown(RIGHT_ARROW) || keyIsDown(76)) {
 			this.moveDelayRight ++
 			if (this.moveDelayRight > 10) {
     			this.counterRight += 33
