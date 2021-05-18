@@ -62,10 +62,10 @@ in the face of death.
 		fill(Math.random()*255,Math.random()*255,Math.random()*255)
 		text("FLEXTRIS", this.logo.x,this.logo.y)
 
-		textAlign(RIGHT)
-		textFont(myFont,this.beta.fontSize)
-		fill(Math.random()*100)
-		text("BETA", this.beta.x,this.beta.y)
+		// textAlign(RIGHT)
+		// textFont(myFont,this.beta.fontSize)
+		// fill(Math.random()*100)
+		// text("BETA", this.beta.x,this.beta.y)
 
 		textAlign(LEFT)
 		fill(255)
